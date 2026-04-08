@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bugambilia - Menú</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple-50: #faf5ff;
+            --purple-100: #f3e8ff;
+            --purple-200: #e9d5ff;
+            --purple-300: #d8b4fe;
+            --purple-400: #c084fc;
+            --purple-500: #a855f7;
+            --purple-600: #9333ea;
+            --purple-700: #7e22ce;
+            --purple-800: #6b21a8;
+            --purple-900: #581c87;
+            --pink-400: #f472b6;
+            --pink-500: #ec4899;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--purple-50) 0%, var(--purple-100) 50%, #ffe4f6 100%);
+            min-height: 100vh;
+            color: var(--purple-900);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--purple-600) 0%, var(--purple-800) 100%);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 3s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo span {
+            color: var(--pink-400);
+        }
+
+        .tagline {
+            color: var(--purple-200);
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+            font-weight: 400;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 4px 20px rgba(147, 51, 234, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-tab {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            background: var(--purple-50);
+            color: var(--purple-700);
+            border-radius: 25px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-tab:hover {
+            background: var(--purple-200);
+            transform: translateY(-2px);
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, var(--purple-500) 0%, var(--purple-600) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .category-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .category-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--purple-800);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .category-title::before {
+            content: '';
+            width: 4px;
+            height: 30px;
+            background: linear-gradient(180deg, var(--pink-400), var(--purple-500));
+            border-radius: 2px;
+        }
+
+        /* Subcategory */
+        .subcategory {
+            margin-bottom: 2.5rem;
+        }
+
+        .subcategory-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--purple-600);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px dashed var(--purple-300);
+        }
+
+        /* Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Menu Card */
+        .menu-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(147, 51, 234, 0.12);
+            transition: all 0.3s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(147, 51, 234, 0.2);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: var(--purple-100);
+        }
+
+        .card-content {
+            padding: 1.25rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--purple-800);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            font-size: 0.85rem;
+            color: var(--purple-600);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .card-price {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--purple-500) 0%, var(--purple-600) 100%);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* Location Section */
+        .location-section {
+            background: linear-gradient(135deg, var(--purple-700) 0%, var(--purple-900) 100%);
+            border-radius: 25px;
+            padding: 2.5rem 1.5rem;
+            margin-top: 3rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .location-section::before {
+            content: '📍';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            font-size: 100px;
+            opacity: 0.1;
+        }
+
+        .location-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .location-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .location-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .location-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--purple-900);
+            color: var(--purple-200);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--pink-500);
+            transform: scale(1.1);
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--pink-500) 0%, var(--purple-600) 100%);
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
+            z-index: 200;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+
+            .nav-tabs {
+                padding: 0.5rem;
+                gap: 0.3rem;
+            }
+
+            .nav-tab {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.75rem;
+            }
+
+            .category-title {
+                font-size: 1.4rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .location-title {
+                font-size: 1.4rem;
+            }
+
+            .location-item {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Floating decoration */
+        .float-decoration {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.15;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        .float-decoration:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .float-decoration:nth-child(2) { top: 30%; right: 8%; animation-delay: 1s; }
+        .float-decoration:nth-child(3) { bottom: 20%; left: 10%; animation-delay: 2s; }
+        .float-decoration:nth-child(4) { bottom: 40%; right: 5%; animation-delay: 3s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Decorations -->
+    <div class="float-decoration">🌸</div>
+    <div class="float-decoration">✨</div>
+    <div class="float-decoration">💜</div>
+    <div class="float-decoration">🍰</div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Bugambilia<span>.</span></div>
+        <p class="tagline">Sabores que florecen en tu paladar</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-tabs">
+            <button class="nav-tab active" data-category="postres">Postres</button>
+            <button class="nav-tab" data-category="crepas-saladas">Crepas Saladas</button>
+            <button class="nav-tab" data-category="crepas-dulces">Crepas Dulces</button>
+            <button class="nav-tab" data-category="hotcakes">Hotcakes</button>
+            <button class="nav-tab" data-category="bebidas">Bebidas</button>
+            <button class="nav-tab" data-category="sodas">Sodas Italianas</button>
+            <button class="nav-tab" data-category="fapres">Fapres</button>
+            <button class="nav-tab" data-category="refrescos">Refrescos</button>
+            <button class="nav-tab" data-category="ubicacion">Ubicación</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Postres Category -->
+        <section class="category-section active" id="postres">
+            <h2 class="category-title">Postres</h2>
+            
+            <div class="subcategory">
+                <h3 class="subcategory-title">🥞 Crepas Saladas</h3>
+                <div class="menu-grid">
+                    <div class="menu-card">
+                        <img src="http://nosolodulces.es/wp-content/uploads/2017/03/nosolodulces-crepe-salada-jamon-queso.jpg" alt="Jamón y Queso" class="card-image">
+                        <div class="card-content">
+                            <h4 class="card-title">Clásica Jamón y Queso</h4>
+                            <p class="card-description">Deliciosa crepa con jamón serrano, queso mozzarella fundido y vegetales frescos</p>
+                            <span class="card-price">$65</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img src="https://www.recetasderechupete.com/wp-content/uploads/2024/08/3-crepes-Portada-1-1200x828.jpg" alt="Pollo y Champiñones" class="card-image">
+                        <div class="card-content">
+                            <h4 class="card-title">Pollo a la Crema</h4>
+                            <p class="card-description">Trozos de pollo desmenuzado con champiñones y salsa de crema</p>
+                            <span class="card-price">$75</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img src="https://imagenes.elpais.com/resizer/v2/XUMPUWO7FVG6LH6RBTS4FUU72U.jpg?auth=694e2e321d4e5e68b7fa191531672969e94a8ba034428ea73bd05ad1b868abfb&width=1960&height=1470&smart=true" alt="Vegetariana" class="card-image">
+                        <div class="card-content">
+                            <h4 class="card-title">Verduras Mix</h4>
+                            <p class="card-description">Combinación de pimientos, cebolla, champiñones y espinacas con queso de cabra</p>
+                            <span class="card-price">$70</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subcategory">
+                <h3 class="subcategory-title">🍯 Crepas Dulces</h3>
+                <div class="menu-grid">
+                    <div class="menu-card">
+                        <img src="https://www.dessertfortwo.com/wp-content/uploads/2018/11/dulce-de-leche-crepes-735x1056.jpg" alt="Dulce de Leche" class="card-image">
+                        <div class="card-content">
+                            <h4 class="card-title">Dulce de Leche Clásico</h4>
+                            <p class="card-description">Dulce de leche argentino con mantequilla y un toque de vainilla</p>
+                            <span class="card-price">$55</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img src="https://vintagekitchennotes.com/wp-content/uploads/2012/09/Dulce-de-leche-thin-pancakes.jpg" alt="Nutella" class="card-image">
+                        <div class="card-content">
+                            <h4 class="card-title">Nutella & Plátano</h4>
+                            <p class="card-description">Crema de avelledas Nutella con plátano fresco y nueces picadas</p>
+                            <span class="card-price">$65</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img src="https://images.ctfassets.net/naglem4vigsd/5vhKfXNpyxpqp9egTw5VeM/427c974d66f35478ee07c95ca240a683/sweet_dessert_crepes-en-us" alt="Frutos Rojos" class="card-image">
+                        <div class="card-content">
+                            <h4 class="card-title">Frutos Rojos</h4>
+                            <p class="card-description">Mix de fresas, arándanos y zarzamora con crema batida y miel</p>
+                            <span class="card-price">$70</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subcategory">
+                <h3 class="subcategory-title">🧇 Hotcakes</h3>
+                <div class="menu-grid">
+                    <div class="menu-card">
+                        <img src="https://olo-images-live.imgix.net/9d/9deed702a74644fa9c20e2ed65d07f3d.png?auto=format%2Ccompress&q=60&cs=tinysrgb&w=500&h=333&fit=fill&fm=png32&bg=transparent&s=d9c23ec997bb813c63ec8295d01bf81e" alt="Mantequilla y Miel" class="card-image">
+                        <div class="card-content">
+                            <h4 class="card-title">Clásico Mantequilla</h4>
+                            <p class="card-description">Hotcakes esponjosos con mantequilla y miel de abeja</p>
+                            <span class="card-price">$45</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img src="https://s7d1.scene7.com/is/image/mcdonaldsstage/DC_202405_0031_3HotCakes_1564x1564:product-header-mobile?wid=1313&hei=1313&dpr=off" alt="Plátano" class="card-image">
+                        <div class="card-content">
+                            <h4 class="card-title">Plátano y Chocolate</h4>
+                            <p class="card-description">Hotcakes con plátano en rodajas, chocolate fundido y crema</p>
+                            <span class="card-price">$60</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img src="https://www.shutterstock.com/image-photo/fluffy-stack-americanstyle-pancakes-melting-260nw-2683071739.jpg" alt="Berry" class="card-image">
+                        <div class="card-content">
+                            <h4 class="card-title">Berry Explosion</h4>
+                            <p class="card-description">Hotcakes con mix de berries frescos, crema batida y syrup de maple</p>
+                            <span class="card-price">$70</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bebidas Category -->
+        <section class="category-section" id="bebidas">
+            <h2 class="category-title">Bebidas</h2>
+            
+            <div class="subcategory">
+                <h3 class="subcategory-title">🍋 Sodas Italianas</h3>
+                <div class="menu-grid">
+                    <div class="menu-card">
+                        <img src="https://t4.ftcdn.net/jpg/09/10/09/75/360_F_910097561_8uUqHdglYYAPZQKWeH6VGJHHrST4u3OI.jpg" alt="Limón" class="card-image">
+                        <div class="card-content">
+                            <h4 class="card-title">Soda Limón</h4>
+                            <p class="card-description">Refrescante soda italiana con limón natural y burbujas</p>
+                            <span class="card-price">$35</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img src="https://t3.ftcdn.net/jpg/00/81/76/82/360_F_81768214_JY6iQnUXTv4Jl6YyXW7VNgKkFT74ZCbj.jpg" alt="Naranja" class="card-image">
+                        <div class="card-content">
+                            <h4 class="card-title">Soda Naranja</h4>
+                            <p class="card-description">Soda italiana con jugo de naranja fresca y menta</p>
+                            <span class="card-price">$35</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img src="https://www.shutterstock.com/image-photo/iced-orange-italian-soda-isolated-260nw-2536281771.jpg" alt="Frutos Rojos" class="card-image">
+                        <div class="card-content">
+                            <h4 class="card-title">Soda Berry</h4>
+                            <p class="card-description">Combinación de fresa, zarzamora y arándano con soda</p>
+                            <span class="card-price">$40</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subcategory">
+                <h3 class="subcategory-title">🥤 Fapres</h3>
+                <div class="menu-grid">
+                    <div class="menu-card">
+                        <img src="https://cdn.apartmenttherapy.info/image/upload/v1658397380/k/Photo/Recipes/2022-08-Frappe/Frappe_486.jpg" alt="Café" class="card-image">
+                        <div class="card-content">
+                            <h4 class="card-title">Frappe Clásico</h4>
+                            <p class="card-description">Café expresso con leche, hielo y crema batida</p>
+                            <span class="card-price">$50</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img src="https://media.istockphoto.com/id/1400793713/photo/cafe-mocha-with-whip-cream.jpg?s=612x612&w=0&k=20&c=31IKA85NJUYdjkJzM-1aNner-FXYGpB2Rc0QIJ4eWSA=" alt="Chocolate" class="card-image">
+                        <div class="card-content">
+                            <h4 class="card-title">Frappe Chocolate</h4>
+                            <p class="card-description">Chocolate derretido con leche y hielo, cubierto de crema</p>
+                            <span class="card-price">$55</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img src="https://www.thehungrybites.com/wp-content/uploads/2023/06/coffee-ice-cream-frappe-frappuccino-3.jpg" alt="Vainilla" class="card-image">
+                        <div class="card-content">
+                            <h4 class="card-title">Frappe Vainilla</h4>
+                            <p class="card-description">Deliciosa combinación de vainilla con caramelo y crema</p>
+                            <span class="card-price">$55</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subcategory">
+                <h3 class="subcategory-title">🥤 Refrescos</h3>
+                <div class="menu-grid">
+                    <div class="menu-card">
+                        <img src="https://img.freepik.com/free-psd/refreshing-ice-cold-cola-drink-glass-with-splash_632498-25634.jpg?semt=ais_hybrid&w=740&q=80" alt="Cola" class="card-image">
+                        <div class="card-content">
+                            <h4 class="card-title">Refresco de Cola</h4>
+                            <p class="card-description">Refresco clásico bien frío con hielo</p>
+                            <span class="card-price">$25</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img src="https://m.media-amazon.com/images/I/714i0HvU25L._AC_UF1000,1000_QL80_.jpg" alt="Manzana" class="card-image">
+                        <div class="card-content">
+                            <h4 class="card-title">Refresco de Manzana</h4>
+                            <p class="card-description">Refresco de manzana natural bien frío</p>
+                            <span class="card-price">$25</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img src="https://i5.walmartimages.com/seo/Goya-Foods-Refresco-Fruit-Punch-Soda-12-Fl-Oz-Pack-of-24_43ec9862-6128-457d-ba35-92024ac1f1c9.16ee83a3d801618f09070b83baf6e725.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF" alt="Uva" class="card-image">
+                        <div class="card-content">
+                            <h4 class="card-title">Refresco de Uva</h4>
+                            <p class="card-description">Refresco de uva sabor original</p>
+                            <span class="card-price">$25</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Section -->
+        <section class="category-section" id="ubicacion">
+            <h2 class="category-title">Encuéntranos</h2>
+            
+            <div class="location-section">
+                <h3 class="location-title">📍 Bugambilia</h3>
+                <div class="location-info">
+                    <div class="location-item">
+                        <div class="location-icon">🏠</div>
+                        <span>Av. Principal #123, Centro</span>
+                    </div>
+                    <div class="location-item">
+                        <div class="location-icon">📞</div>
+                        <span>(55) 1234-5678</span>
+                    </div>
+                    <div class="location-item">
+                        <div class="location-icon">🕐</div>
+                        <span>Lun-Dom: 8:00 AM - 10:00 PM</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#" class="social-link">📘</a>
+            <a href="#" class="social-link">📸</a>
+            <a href="#" class="social-link">🐦</a>
+        </div>
+        <p class="copyright">© 2026 Bugambilia. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        const navTabs = document.querySelectorAll('.nav-tab');
+        const categorySections = document.querySelectorAll('.category-section');
+
+        // Map nav tabs to sections
+        const tabToSection = {
+            'postres': 'postres',
+            'crepas-saladas': 'postres',
+            'crepas-dulces': 'postres',
+            'hotcakes': 'postres',
+            'bebidas': 'bebidas',
+            'sodas': 'bebidas',
+            'fapres': 'bebidas',
+            'refrescos': 'bebidas',
+            'ubicacion': 'ubicacion'
+        };
+
+        // Main categories that show all their sub-items
+        const mainCategories = ['postres', 'bebidas'];
+
+        navTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const category = tab.dataset.category;
+                
+                // Update active tab
+                navTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Show appropriate section
+                categorySections.forEach(section => {
+                    section.classList.remove('active');
+                });
+
+                if (mainCategories.includes(category)) {
+                    document.getElementById(category).classList.add('active');
+                } else {
+                    const mainCategory = tabToSection[category];
+                    document.getElementById(mainCategory).classList.add('active');
+                    
+                    // Scroll to the specific subcategory
+                    setTimeout(() => {
+                        const subcategoryTitles = document.querySelectorAll('.subcategory-title');
+                        subcategoryTitles.forEach(title => {
+                            if (title.textContent.toLowerCase().includes(getSubcategoryKeyword(category))) {
+                                title.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }
+                        });
+                    }, 100);
+                }
+            });
+        });
+
+        function getSubcategoryKeyword(category) {
+            const keywords = {
+                'crepas-saladas': 'crepas saladas',
+                'crepas-dulces': 'crepas dulces',
+                'hotcakes': 'hotcakes',
+                'sodas': 'sodas italianas',
+                'fapres': 'fapres',
+                'refrescos': 'refrescos'
+            };
+            return keywords[category] || category;
+        }
+
+        // Add smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
